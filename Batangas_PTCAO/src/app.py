@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 from extension import db
-from model import User
+from model import User, BusinessRegistration
 
 app = Flask(__name__, template_folder='routes', static_folder='static')
 app.config.from_object('config.Config')
@@ -12,7 +12,8 @@ db.init_app(app)
 def home():
     return render_template('Login.html')
 
-
+# Run Test - 0
+# Working
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -27,7 +28,8 @@ def login():
             return render_template('Login.html')
     return render_template('Login.html')
 
-
+# Run Test - 0
+# Working
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
@@ -54,6 +56,37 @@ def register():
 
     return render_template('LoginCredentials.html')
 
+# Run Test - 0
+# Not yet tested
+@app.route('/business_registration', methods=['GET', 'POST'])
+def business_registration():
+    if 'account_id' not in session:
+        flash('Please log in first', 'error')
+        return redirect(url_for('login'))
+
+    if request.method == 'POST':
+        # Collect business registration details
+        business_reg_data = {
+            'account_id': session['account_id'],
+            'business_registration_no': request.form.get('business-registration'),
+            'business_name': request.form.get('business-name'),
+            'official_contact_no': request.form.get('official-contact'),
+            'business_address': request.form.get('business-address'),
+            'taxpayer_name': request.form.get('taxpayer-name'),
+            'total_employees': request.form.get('total-employees'),
+            'total_rooms': request.form.get('total-rooms'),
+            'total_beds': request.form.get('total-beds')
+        }
+
+        # save business registration
+        new_business = BusinessRegistration(**business_reg_data)
+        db.session.add(new_business)
+        db.session.commit()
+
+        # Redirect to next po
+        return redirect(url_for('special_services'))
+
+    return render_template('Registration.html')
 
 @app.route('/logout')
 def logout():

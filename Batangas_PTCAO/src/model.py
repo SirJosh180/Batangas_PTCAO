@@ -11,3 +11,16 @@ class User(db.Model):
 
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
+
+
+class BusinessRegistration(db.Model):
+    business_id = db.Column(db.Integer, primary_key=True)
+    account_id = db.Column(db.Integer, db.ForeignKey('users.account_id'), nullable=False)
+    business_registration_no = db.Column(db.String(100), nullable=False)
+    business_name = db.Column(db.String(255), nullable=False)
+    official_contact_no = db.Column(db.String(50), nullable=False)
+    business_address = db.Column(db.String(255), nullable=False)
+    taxpayer_name = db.Column(db.String(255), nullable=False)
+    total_employees = db.Column(db.Integer, nullable=False)
+    total_rooms = db.Column(db.Integer, nullable=False)
+    total_beds = db.Column(db.Integer, nullable=False)

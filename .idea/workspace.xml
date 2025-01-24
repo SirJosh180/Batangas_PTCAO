@@ -4,9 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="258dbf88-02d8-4ece-ab89-f759505c2010" name="Changes" comment="comm route">
+    <list default="true" id="258dbf88-02d8-4ece-ab89-f759505c2010" name="Changes" comment="working routing for register. still error on css">
+      <change afterPath="$PROJECT_DIR$/Batangas_PTCAO/src/resources/init.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Batangas_PTCAO/src/routes/Login.html" beforeDir="false" afterPath="$PROJECT_DIR$/Batangas_PTCAO/src/routes/Login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Batangas_PTCAO/src/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/Batangas_PTCAO/src/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Batangas_PTCAO/src/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/Batangas_PTCAO/src/model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Batangas_PTCAO/src/routes/LoginCredentials.html" beforeDir="false" afterPath="$PROJECT_DIR$/Batangas_PTCAO/src/routes/LoginCredentials.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,6 +23,7 @@
         <option value="HTML File" />
         <option value="Python Script" />
         <option value="CSS File" />
+        <option value="SQL File" />
       </list>
     </option>
   </component>
@@ -87,7 +91,7 @@
       <workItem from="1737632824934" duration="3360000" />
       <workItem from="1737638477852" duration="3098000" />
       <workItem from="1737712812472" duration="6803000" />
-      <workItem from="1737726680880" duration="487000" />
+      <workItem from="1737726680880" duration="2046000" />
     </task>
     <task id="LOCAL-00001" summary="start">
       <option name="closed" value="true" />
@@ -121,7 +125,15 @@
       <option name="project" value="LOCAL" />
       <updated>1737726502622</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="working routing for register. still error on css">
+      <option name="closed" value="true" />
+      <created>1737727429164</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1737727429164</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -130,9 +142,10 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="start" />
     <MESSAGE value="comm route" />
-    <option name="LAST_COMMIT_MESSAGE" value="comm route" />
+    <MESSAGE value="working routing for register. still error on css" />
+    <option name="LAST_COMMIT_MESSAGE" value="working routing for register. still error on css" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/DjangoProject$app.coverage" NAME="app Coverage Results" MODIFIED="1737726841189" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Batangas_PTCAO/src" />
+    <SUITE FILE_PATH="coverage/DjangoProject$app.coverage" NAME="app Coverage Results" MODIFIED="1737727254225" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Batangas_PTCAO/src" />
   </component>
 </project>
