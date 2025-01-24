@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AE Registration</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: url('BackgroundImage.png') no-repeat center center fixed;
+            background-size: cover;
+            color: #333;
+            max-height: 100vh; /* Limit the height */
+            overflow-y: auto; /* Enable vertical scrolling */
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 1rem;
+            height: auto; /* Allow the container to grow */
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .logo img {
+            width: 250px;
+            height: auto;
+        }
+
+        .registration-panel {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 2rem;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 700px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .registration-panel h2 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: #007BFF;
+            font-size: 1.8rem;
+        }
+
+        .steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+        }
+
+        .steps span {
+            font-size: 1rem;
+            color: #333;
+            flex: 1;
+            text-align: center;
+        }
+
+        .steps .active {
+            color: #007BFF;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-actions {
+            text-align: center;
+        }
+
+        .form-actions button {
+            padding: 0.8rem 2rem;
+            border: none;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .form-actions button:hover {
+            background-color: #0056b3;
+        }
+
+        .form-footer {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .form-footer a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        .form-footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="registration-panel">
+            <div class="logo">
+                <img src="Batangas_Logo.png" alt="Office Logo">
+            </div>
+            <h2>AE REGISTRATION</h2>
+
+            <div class="steps">
+                <span class="active">Details</span>
+                <span>Special Services</span>
+                <span>Login Credentials</span>
+            </div>
+
+            <form>
+                <div class="form-group">
+                    <label for="business-registration">Business Registration No</label>
+                    <input type="text" class="form-control" id="business-registration" placeholder="Enter business registration no" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="business-name">Business Name</label>
+                    <input type="text" class="form-control" id="business-name" placeholder="Enter business name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="official-contact">Official Contact No</label>
+                    <input type="text" class="form-control" id="official-contact" placeholder="Enter official contact no" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="business-address">Business Address</label>
+                    <input type="text" class="form-control" id="business-address" placeholder="Enter Business Address" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="taxpayer-name">Tax Payer Name</label>
+                    <input type="text" class="form-control" id="taxpayer-name" placeholder="Enter Tax Payer Name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="total-employees">No. of Employees</label>
+                    <input type="number" class="form-control" id="total-employees" placeholder="Enter total no. of employees" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="total-rooms">Total No. of Rooms</label>
+                    <input type="number" class="form-control" id="total-rooms" placeholder="Enter total no. of rooms" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="total-beds">Total No. of Beds</label>
+                    <input type="number" class="form-control" id="total-beds" placeholder="Enter total no. of beds" required>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Next</button>
+                </div>
+            </form>
+
+            <div class="form-footer">
+                <p>By proceeding with this registration, you consent to the <a href="#">Data Privacy Notice</a> of this system.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies (optional) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
