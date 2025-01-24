@@ -10,8 +10,7 @@
             font-family: Arial, sans-serif;
             background: url('BackgroundImage.png') no-repeat center center fixed;
             background-size: cover;
-            color: #f5f7fa;
-           
+            color: #fff;
         }
 
         .container {
@@ -19,6 +18,15 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
+        }
+        .logo {
+            margin-bottom: .5rem;
+            text-align: center;
+        }
+
+        .logo img {
+            max-width: 210px;
+            height: auto;
         }
 
         .left-panel {
@@ -38,8 +46,8 @@
         }
 
         .right-panel {
-            flex: 2;
-            background: rgba(250, 251, 253, 0.9);
+            flex: 1;
+            background: rgba(255, 255, 255, 0.9);
             border-radius: 10px;
             padding: 2rem;
             max-width: 400px;
@@ -111,6 +119,10 @@
             <p>All here, So Near</p>
         </div>
         <div class="right-panel">
+            <div class="logo">
+                <img src="Batangas_Logo.png" alt="Office Logo">
+            </div>
+            
             <h2>Log In to Your Account</h2>
             <form>
                 <div class="form-group">
