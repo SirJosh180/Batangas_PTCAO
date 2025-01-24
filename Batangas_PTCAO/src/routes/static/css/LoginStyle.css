@@ -1,0 +1,105 @@
+body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: url('../../img/BackgroundImage.png') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .logo {
+            margin-bottom: .5rem;
+            text-align: center;
+        }
+
+        .logo img {
+            max-width: 210px;
+            height: auto;
+        }
+
+        .left-panel {
+            flex: 1;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .left-panel h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .left-panel p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .right-panel {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            padding: 2rem;
+            max-width: 400px;
+        }
+
+        .right-panel h2 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .form-group input[type="checkbox"] {
+            width: auto;
+        }
+
+        .form-actions {
+            text-align: center;
+        }
+
+        .form-actions button {
+            padding: 0.8rem 2rem;
+            border: none;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .form-actions button:hover {
+            background-color: #0056b3;
+        }
+
+        .form-actions a {
+            display: block;
+            margin-top: 1rem;
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        .form-actions a:hover {
+            text-decoration: underline;
+        }
