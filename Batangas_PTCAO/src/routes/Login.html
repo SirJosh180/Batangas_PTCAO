@@ -2,9 +2,136 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Provincial Tourism Office</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: url('BackgroundImage.png') no-repeat center center fixed;
+            background-size: cover;
+            color: #f5f7fa;
+           
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .left-panel {
+            flex: 1;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .left-panel h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .left-panel p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .right-panel {
+            flex: 2;
+            background: rgba(250, 251, 253, 0.9);
+            border-radius: 10px;
+            padding: 2rem;
+            max-width: 400px;
+        }
+
+        .right-panel h2 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .form-group input[type="checkbox"] {
+            width: auto;
+        }
+
+        .form-actions {
+            text-align: center;
+        }
+
+        .form-actions button {
+            padding: 0.8rem 2rem;
+            border: none;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .form-actions button:hover {
+            background-color: #0056b3;
+        }
+
+        .form-actions a {
+            display: block;
+            margin-top: 1rem;
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        .form-actions a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-
+    <div class="container">
+        <div class="left-panel">
+            <h1>Provincial Tourism and Cultural Affairs Office</h1>
+            <p>All here, So Near</p>
+        </div>
+        <div class="right-panel">
+            <h2>Log In to Your Account</h2>
+            <form>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" id="remember" name="remember">
+                    <label for="remember">Remember me</label>
+                </div>
+                <div class="form-actions">
+                    <button type="submit">Login</button>
+                    <a href="#">Forgot Password?</a>
+                    <a href="#">Need an Account? Register!</a>
+                </div>
+            </form>
+        </div>
+    </div>
 </body>
 </html>
