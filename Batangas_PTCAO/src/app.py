@@ -7,13 +7,10 @@ app.config.from_object('config.Config')
 app.secret_key = "SECRET_KEY"
 db.init_app(app)
 
-
 @app.route('/')
 def home():
     return render_template('Login.html')
 
-# Run Test - 0
-# Working
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -28,8 +25,6 @@ def login():
             return render_template('Login.html')
     return render_template('Login.html')
 
-# Run Test - 0
-# Working
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
@@ -56,8 +51,6 @@ def register():
 
     return render_template('LoginCredentials.html')
 
-# Run Test - 0
-# Not yet tested
 @app.route('/business_registration', methods=['GET', 'POST'])
 def business_registration():
     if 'account_id' not in session:
@@ -92,7 +85,6 @@ def business_registration():
 def logout():
     session.pop('user_id', None)
     return redirect(url_for('login'))
-
 
 if __name__ == '__main__':
     app.run(debug=True)
