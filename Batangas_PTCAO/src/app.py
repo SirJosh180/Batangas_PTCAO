@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session, flash
+from flask import Flask, render_template, request, redirect, url_for, session, flash, send_from_directory
 from extension import db
 from model import User, BusinessRegistration
 
@@ -6,8 +6,6 @@ app = Flask(__name__, template_folder='routes', static_folder='static')
 app.config.from_object('config.Config')
 app.secret_key = "SECRET_KEY"
 db.init_app(app)
-
-
 @app.route('/')
 def home():
     return render_template('Login.html')
@@ -92,7 +90,16 @@ def business_registration():
 def logout():
     session.pop('user_id', None)
     return redirect(url_for('login'))
+@app.route('/static/<path:filename>')
+def serve_static_file(filename):
+    if allowed_file(filename):
+        return send_from_directory(app.root_path + '/static/', filename)
+    else:
+        return 'File type not allowed', 400
 
+def allowed_file(filename):
+    ALLOWED_EXTENSIONS = ['png', 'jpg', 'jpeg', 'gif']
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 if __name__ == '__main__':
     app.run(debug=True)
