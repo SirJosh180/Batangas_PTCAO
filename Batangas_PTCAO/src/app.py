@@ -29,6 +29,7 @@ def login():
            return render_template('Login.html')
    return render_template('Login.html')
 
+# Ready for testing
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
