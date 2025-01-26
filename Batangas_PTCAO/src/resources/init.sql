@@ -18,4 +18,5 @@ CREATE TABLE BusinessRegistration (
     total_rooms INTEGER NOT NULL,
     total_beds INTEGER NOT NULL,
     CONSTRAINT fk_account FOREIGN KEY (account_id) REFERENCES users(account_id)
+        ON DELETE CASCADE ON UPDATE CASCADE
 );

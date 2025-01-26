@@ -12,7 +12,7 @@
   <component name="PyNamespacePackagesService">
     <option name="namespacePackageFolders">
       <list>
-        <option value="$MODULE_DIR$/Batangas_PTCAO/src/routes/static" />
+        <option value="$MODULE_DIR$/Batangas_PTCAO/src/static" />
       </list>
     </option>
   </component>

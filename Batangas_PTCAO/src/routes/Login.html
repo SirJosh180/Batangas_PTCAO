@@ -8,7 +8,7 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background: url('{{ url_for('serve_static_file', filename='img/BackgroundImage.png') }}') no-repeat center center fixed;
+            background: url("{{ url_for('serve_static_file', filename='img/BackgroundImage.png') }}") no-repeat center center fixed;
             background-size: cover;
             color: #fff;
         }
@@ -120,9 +120,8 @@
         </div>
         <div class="right-panel">
             <div class="logo">
-                <img src="{{ url_for('static', filename='img/Batangas_Logo.png') }}" alt="Office Logo">
+                <img src="{{ url_for('serve_static_file', filename='img/Batangas_Logo.png') }}" alt="Office Logo">
             </div>
-
             <h2>Log In to Your Account</h2>
             <form action="{{ url_for('login') }}" method="POST">
                 <div class="form-group">
