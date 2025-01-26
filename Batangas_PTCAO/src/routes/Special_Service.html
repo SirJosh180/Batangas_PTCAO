@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AE Registration</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        function addRoom() {
+            const roomSection = document.querySelector('#rooms-section');
+            const newRoom = document.createElement('div');
+            newRoom.className = "grid grid-cols-3 gap-4 mt-4";
+            newRoom.innerHTML = `
+                <div>
+                    <label class="block font-medium">Types</label>
+                    <select class="w-full border rounded-lg p-2">
+                        <option value="">Select the Type of Room</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block font-medium">Total No.</label>
+                    <input type="number" placeholder="Enter no. of beds" class="w-full border rounded-lg p-2">
+                </div>
+                <div>
+                    <label class="block font-medium">Capacity</label>
+                    <input type="number" placeholder="No. of people" class="w-full border rounded-lg p-2">
+                </div>`;
+            roomSection.appendChild(newRoom);
+        }
+
+        function addEventFacility() {
+            const eventSection = document.querySelector('#event-section');
+            const newEvent = document.createElement('div');
+            newEvent.className = "grid grid-cols-3 gap-4 mt-4";
+            newEvent.innerHTML = `
+                <div>
+                    <label class="block font-medium">Function Room's Name</label>
+                    <input type="text" placeholder="Enter function room's name" class="w-full border rounded-lg p-2">
+                </div>
+                <div>
+                    <label class="block font-medium">Room Capacity</label>
+                    <input type="number" placeholder="Enter room capacity" class="w-full border rounded-lg p-2">
+                </div>
+                <div>
+                    <label class="block font-medium">Facilities & Amenities</label>
+                    <select class="w-full border rounded-lg p-2">
+                        <option value="">Select Facilities</option>
+                    </select>
+                </div>`;
+            eventSection.appendChild(newEvent);
+        }
+    </script>
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: url('img/BackgroundImage.png') no-repeat center center fixed;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    .logo {
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+
+    .logo img {
+        width: 250px;
+        height: auto;
+    }
+    .steps {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 1.5rem;
+    }
+
+    .steps span {
+        font-size: 1rem;
+        color: #333;
+        flex: 1;
+        text-align: center;
+    }
+
+    .steps .active {
+        color: #007BFF;
+    }
+    .registration-container {
+        background-color: white;
+        width: 500px;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+</style>
+
+<body class="bg-blue-100">
+    <div class="max-w-4xl mx-auto bg-white shadow-md rounded-lg mt-10 p-8 overflow-y-auto h-screen">
+        <div class="text-center mb-6">
+            <div class="logo">
+                <img src="img/Batangas_Logo.png" alt="Logo" class="w-20 mx-auto mb-4">
+                </div>
+        
+            <h1 class="text-2xl font-bold">AE REGISTRATION</h1>
+        </div>
+
+        <div class="steps">
+            <span ><i class="fas fa-info-circle"></i> Details</span>
+            <span class="active"><i class="fas fa-cogs"></i> Special Services</span>
+            <span ><i class="fas fa-user-lock"></i> Login Credentials</span>
+        </div>
+
+
+        <form>
+            <div class="mb-4">
+                <label for="accreditation" class="block font-medium">Type of Accreditation</label>
+                <select id="accreditation" class="w-full border rounded-lg p-2">
+                    <option value="">Select the Type of Accreditation</option>
+                    <option value="">Star Rating Accreditation</option>
+                    <option value="">Premium Accreditation</option>
+                    <option value="">Regular Accreditation</option>
+                    <option value="">Basic Accreditation</option>
+                    <option value="">Mabuhay Accreditation</option>
+                </select>
+            </div>
+
+            <div class="mb-4 overflow-y-auto" style="max-height: 150px;">
+                <label for="classification" class="block font-medium">AE (Accommodation Establishment) Classification</label>
+                <select id="classification" class="w-full border rounded-lg p-2">
+                    <option value="">Select the AE Classification</option>
+                    <option value="">HTL Hotel</option>
+                    <option value="">CON Condotel</option>
+                    <option value="">SER Service Residence</option>
+                    <option value="">RES Resort</option>
+                    <option value="">APA Apartelle</option>
+                    <option value="">MOT Motel</option>
+                    <option value="">PEN Pension House</option>
+                    <option value="">HSS Home Stay Site</option>
+                    <option value="">TIN Tourist Inn</option>
+                    <option value="">OTH Other</option>
+                </select>
+            </div>
+
+            <div id="rooms-section" class="mb-4">
+                <h2 class="font-semibold text-lg">ROOMS</h2>
+                <div class="grid grid-cols-3 gap-4">
+                    <div>
+                        <label for="room-type" class="block font-medium">Types</label>
+                        <select id="room-type" class="w-full border rounded-lg p-2">
+                            <option value="">Select the Type of Room</option>
+                            <option value="">Select the Type of Room</option>
+                            <option value="">AC Rooms</option>
+                            <option value="">Non AC Rooms</option>
+                            <option value="">Kubo Rooms</option>
+                            <option value="">Kubo</option>
+                            <option value="">Open Cottages</option>
+                            <option value="">Cabana</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="no-of-beds" class="block font-medium">Total No.</label>
+                        <input id="no-of-beds" type="number" placeholder="Enter no. of beds" class="w-full border rounded-lg p-2">
+                    </div>
+                    <div>
+                        <label for="capacity" class="block font-medium">Capacity</label>
+                        <input id="capacity" type="number" placeholder="No. of people" class="w-full border rounded-lg p-2">
+                    </div>
+                </div>
+                <button type="button" class="mt-2 bg-blue-600 text-white px-4 py-2 rounded-lg" onclick="addRoom()">Add</button>
+            </div>
+
+            <div id="event-section" class="mb-4">
+                <h2 class="font-semibold text-lg">EVENT AND FACILITIES</h2>
+                <div class="grid grid-cols-3 gap-4">
+                    <div>
+                        <label for="function-room" class="block font-medium">Function Room's Name</label>
+                        <input id="function-room" type="text" placeholder="Enter function room's name" class="w-full border rounded-lg p-2">
+                    </div>
+                    <div>
+                        <label for="room-capacity" class="block font-medium">Room Capacity</label>
+                        <input id="room-capacity" type="number" placeholder="Enter room capacity" class="w-full border rounded-lg p-2">
+                    </div>
+                    <div>
+                        <label for="facilities" class="block font-medium">Facilities & Amenities</label>
+                        <select id="facilities" class="w-full border rounded-lg p-2">
+                            <option value="">Select Facilities</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="button" class="mt-2 bg-blue-600 text-white px-4 py-2 rounded-lg" onclick="addEventFacility()">Add</button>
+            </div>
+
+            <div class="mb-4">
+                <h2 class="font-semibold text-lg">OTHER HOTEL ANCILLARIES</h2>
+                <div>
+                    <label for="services" class="block font-medium">Type of Services</label>
+                    <select id="services" class="w-full border rounded-lg p-2">
+                        <option value="">Select the Type of Services</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="flex justify-between mt-6">
+                <button type="button" class="bg-gray-400 text-white px-6 py-2 rounded-lg">Prev</button>
+                <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-lg">Next</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
