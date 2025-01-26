@@ -13,24 +13,20 @@ db.init_app(app)
 def home():
     return render_template('Login.html')
 
-# Run Test - 0
-# Working
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    if request.method == 'POST':
-        user_email = request.form.get('email')
-        password = request.form.get('password')
-        user = User.query.filter_by(user_email=user_email).first()
-        if user and user.check_password(password):
-            session['account_id'] = user.user_id
-            return redirect(url_for('dashboard'))
-        else:
-            flash('Invalid email or password', 'error')
-            return render_template('Login.html')
-    return render_template('Login.html')
+   if request.method == 'POST':
+       user_email = request.form.get('email')
+       password = request.form.get('password')
+       user = User.query.filter_by(user_email=user_email).first()
+       if user and user.check_password(password):
+           session['account_id'] = user.user_id
+           return redirect(url_for('dashboard'))
+       else:
+           flash('Invalid email or password', 'error')
+           return render_template('Login.html')
+   return render_template('Login.html')
 
-# Run Test - 0
-# Working
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
@@ -42,6 +38,7 @@ def register():
             flash('Passwords do not match', 'error')
             return render_template('LoginCredentials.html')
 
+        # Changed from "user" to work with "users" table
         existing_user = User.query.filter_by(user_email=user_email).first()
         if existing_user:
             flash('Email already exists', 'error')
@@ -57,8 +54,6 @@ def register():
 
     return render_template('LoginCredentials.html')
 
-# Run Test - 0
-# Not yet tested
 @app.route('/business_registration', methods=['GET', 'POST'])
 def business_registration():
     if 'account_id' not in session:
