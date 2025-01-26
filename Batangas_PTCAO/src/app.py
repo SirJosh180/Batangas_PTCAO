@@ -13,6 +13,8 @@ db.init_app(app)
 def home():
     return render_template('Login.html')
 
+
+# needs test case for incorrect password input
 @app.route('/login', methods=['GET', 'POST'])
 def login():
    if request.method == 'POST':
