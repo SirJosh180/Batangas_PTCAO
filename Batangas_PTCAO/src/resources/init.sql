@@ -20,3 +20,8 @@ CREATE TABLE BusinessRegistration (
     CONSTRAINT fk_account FOREIGN KEY (account_id) REFERENCES users(account_id)
         ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+
+INSERT INTO users (user_email, password) VALUES
+('user1@example.com', 'password123'),
+('user2@example.com', 'securepass456');
