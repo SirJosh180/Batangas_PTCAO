@@ -1,9 +1,11 @@
 CREATE DATABASE PTCAO;
 
 CREATE TABLE users (
-    account_id SERIAL PRIMARY KEY,
-    user_email VARCHAR(255) NOT NULL,
-    password VARCHAR(50) NOT NULL
+    user_id SERIAL PRIMARY KEY,
+    user_email VARCHAR(255) UNIQUE NOT NULL,
+    password_hash VARCHAR(255) NOT NULL,
+    account_status VARCHAR(20) DEFAULT 'active',
+    failed_login_attempts INTEGER DEFAULT 0
 );
 
 CREATE TABLE BusinessRegistration (
@@ -20,5 +22,6 @@ CREATE TABLE BusinessRegistration (
     CONSTRAINT fk_account FOREIGN KEY (account_id) REFERENCES users(account_id)
         ON DELETE CASCADE ON UPDATE CASCADE
 );
+
 
 
