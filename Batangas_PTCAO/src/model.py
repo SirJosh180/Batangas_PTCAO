@@ -8,6 +8,10 @@ class AccountStatus(str, Enum):
     SUSPENDED = 'suspended'
     MAINTENANCE = 'maintenance'
 
+class RegistrationStep(str, Enum):
+    BUSINESS_DETAILS = 'business_details'
+    SPECIAL_SERVICES = 'special_services'
+    LOGIN_CREDENTIALS = 'login_credentials'
 
 class User(db.Model):
     __tablename__ = 'users'
@@ -17,6 +21,8 @@ class User(db.Model):
     password_hash = db.Column(db.String(255), nullable=False)
     account_status = db.Column(db.String(20), default=AccountStatus.ACTIVE)
     failed_login_attempts = db.Column(db.Integer, default=0)
+    business_registration = db.relationship('BusinessRegistration', backref='user', lazy=True)
+
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -29,11 +35,6 @@ class User(db.Model):
 
     def is_active(self):
         return self.account_status == AccountStatus.ACTIVE
-
-    def update_status(self, new_status):
-        if new_status not in AccountStatus:
-            raise ValueError("Invalid account status")
-        self.account_status = new_status
 
 
 class BusinessRegistration(db.Model):
@@ -49,3 +50,31 @@ class BusinessRegistration(db.Model):
     total_employees = db.Column(db.Integer, nullable=False)
     total_rooms = db.Column(db.Integer, nullable=False)
     total_beds = db.Column(db.Integer, nullable=False)
+    special_services = db.relationship('SpecialServices', backref='business', lazy=True)
+
+
+class SpecialServices(db.Model):
+    __tablename__ = 'special_services'
+
+    service_id = db.Column(db.Integer, primary_key = True)
+    business_id = db.Column(db.Integer, db.ForeignKey('businessregistration.business_id'), nullable=False)
+    accreditation_type = db.Column(db.String(100), nullable=False)
+    ae_classification = db.Column(db.String(100), nullable=False)
+
+class Room(db.Model):
+    __tablename__ = 'rooms'
+
+    room_id = db.Column(db.Integer, primary_key=True)
+    business_id = db.Column(db.Integer, db.ForeignKey('businessregistration.business_id'), nullable=False)
+    room_type = db.Column(db.String(100), nullable=False)
+    total_number = db.Column(db.Integer, nullable=False)
+    capacity = db.Column(db.Integer, nullable=False)
+
+class EventFacility(db.Model):
+    __tablename__ = 'event_facilities'
+
+    facility_id = db.Column(db.Integer, primary_key=True)
+    business_id = db.Column(db.Integer, db.ForeignKey('businessregistration.business_id'), nullable=False)
+    room_name = db.Column(db.String(255), nullable=False)
+    capacity = db.Column(db.Integer, nullable=False)
+    facilities = db.Column(db.String(255), nullable=False)
