@@ -23,3 +23,5 @@ CREATE TABLE BusinessRegistration (
         ON DELETE CASCADE ON UPDATE CASCADE
 );
 
+
+
