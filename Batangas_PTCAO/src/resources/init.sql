@@ -22,6 +22,3 @@ CREATE TABLE BusinessRegistration (
 );
 
 
-INSERT INTO users (user_email, password) VALUES
-('user1@example.com', 'password123'),
-('user2@example.com', 'securepass456');
