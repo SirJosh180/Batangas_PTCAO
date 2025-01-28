@@ -2,7 +2,7 @@ import os
 from flask import Flask, render_template, request, redirect, url_for, session, flash, send_from_directory, jsonify
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 from Batangas_PTCAO.src.extension import db
-from Batangas_PTCAO.src.model import User, BusinessRegistration
+from Batangas_PTCAO.src.model import User, BusinessRegistration, Room, EventFacility, SpecialServices, RegistrationStep
 from Batangas_PTCAO.src.config import Config
 
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -79,43 +79,18 @@ def login():
 
     return render_template('Login.html')
 # Ready for testing
-@app.route('/register', methods=['GET', 'POST'])
+@app.route('/register', methods=['GET'])
 def register():
-    if request.method == 'POST':
-        user_email = request.form.get('username')
-        password = request.form.get('password')
-        confirm_password = request.form.get('confirm-password')
-
-        if password != confirm_password:
-            flash('Passwords do not match', 'error')
-            return render_template('Registration.html')
-
-        # Changed from "user" to work with "users" table
-        existing_user = User.query.filter_by(user_email=user_email).first()
-        if existing_user:
-            flash('Email already exists', 'error')
-            return render_template('Registration.html')
-
-        new_user = User(user_email=user_email)
-        new_user.set_password(password)
-        db.session.add(new_user)
-        db.session.commit()
-
-        flash('Registration successful', 'success')
-        return redirect(url_for('login'))
-
+    session['registration_step'] = RegistrationStep.BUSINESS_DETAILS
+    session['registration_data'] = {}
     return render_template('Registration.html')
 
+
+#Tested and Running
 @app.route('/business_registration', methods=['GET', 'POST'])
 def business_registration():
-    if 'account_id' not in session:
-        flash('Please log in first', 'error')
-        return redirect(url_for('login'))
-
     if request.method == 'POST':
-        # Collect business registration details
-        business_reg_data = {
-            'account_id': session['account_id'],
+        business_data = {
             'business_registration_no': request.form.get('business-registration'),
             'business_name': request.form.get('business-name'),
             'official_contact_no': request.form.get('official-contact'),
@@ -126,29 +101,170 @@ def business_registration():
             'total_beds': request.form.get('total-beds')
         }
 
-        # save business registration
-        new_business = BusinessRegistration(**business_reg_data)
-        db.session.add(new_business)
-        db.session.commit()
+        if not all(business_data.values()):
+            flash('All fields are required', 'error')
+            return render_template('Registration.html')
 
-        # Redirect to next po
-        return redirect(url_for('Special_Service'))
+        try:
+            # Convert numeric fields
+            business_data['total_employees'] = int(business_data['total_employees'])
+            business_data['total_rooms'] = int(business_data['total_rooms'])
+            business_data['total_beds'] = int(business_data['total_beds'])
+        except ValueError:
+            flash('Invalid numeric values provided', 'error')
+            return render_template('Registration.html')
+
+        session['registration_data'] = session.get('registration_data', {})
+        session['registration_data']['business'] = business_data
+        session['registration_step'] = RegistrationStep.SPECIAL_SERVICES
+
+        return redirect(url_for('special_services'))
 
     return render_template('Registration.html')
 
+#Tested and Running
 @app.route('/special_services', methods=['GET', 'POST'])
 def special_services():
-    if 'account_id' not in session:
-        flash('Please log in first', 'error')
-        return redirect(url_for('login'))
-
-    business_reg = BusinessRegistration.query.filter_by(account_id=session['account_id']).order_by(BusinessRegistration.business_id.desc()).first()
+    if 'registration_data' not in session or 'business' not in session['registration_data']:
+        flash('Please complete business registration first', 'error')
+        return redirect(url_for('business_registration'))
 
     if request.method == 'POST':
-        return redirect(url_for('LoginCredentials'))
+        # Process rooms data
+        rooms_data = []
+        room_types = request.form.getlist('room_type[]')
+        room_numbers = request.form.getlist('room_number[]')
+        room_capacities = request.form.getlist('room_capacity[]')
 
-    return render_template('special_services.html', business_reg=business_reg)
+        for i in range(len(room_types)):
+            if room_types[i] and room_numbers[i] and room_capacities[i]:
+                rooms_data.append({
+                    'type': room_types[i],
+                    'number': int(room_numbers[i]),
+                    'capacity': int(room_capacities[i])
+                })
 
+        # Process event facilities data
+        facilities_data = []
+        facility_names = request.form.getlist('facility_name[]')
+        facility_capacities = request.form.getlist('facility_capacity[]')
+        facility_amenities = request.form.getlist('facility_amenities[]')
+
+        for i in range(len(facility_names)):
+            if facility_names[i] and facility_capacities[i] and facility_amenities[i]:
+                facilities_data.append({
+                    'name': facility_names[i],
+                    'capacity': int(facility_capacities[i]),
+                    'amenities': facility_amenities[i]
+                })
+
+        services_data = {
+            'accreditation': request.form.get('accreditation'),
+            'classification': request.form.get('classification'),
+            'rooms': rooms_data,
+            'facilities': facilities_data,
+            'other_services': request.form.get('services')
+        }
+
+        if not services_data['accreditation'] or not services_data['classification']:
+            flash('Accreditation and classification are required', 'error')
+            return render_template('Special_Service.html')
+
+        session['registration_data']['services'] = services_data
+        session['registration_step'] = RegistrationStep.LOGIN_CREDENTIALS
+
+        return redirect(url_for('login_credentials'))
+
+    return render_template('Special_Service.html')
+
+
+@app.route('/login_credentials', methods=['GET', 'POST'])
+def login_credentials():
+    if 'registration_data' not in session or 'services' not in session['registration_data']:
+        flash('Please complete special services first', 'error')
+        return redirect(url_for('special_services'))
+
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
+        confirm_password = request.form.get('confirm-password')
+
+        if not username or not password or not confirm_password:
+            flash('All fields are required', 'error')
+            return render_template('LoginCredentials.html')
+
+        if password != confirm_password:
+            flash('Passwords do not match', 'error')
+            return render_template('LoginCredentials.html')
+
+        if User.query.filter_by(user_email=username).first():
+            flash('Username already exists', 'error')
+            return render_template('LoginCredentials.html')
+
+        try:
+            # Start database transaction
+            db.session.begin_nested()
+
+            # Create user
+            new_user = User(user_email=username)
+            new_user.set_password(password)
+            db.session.add(new_user)
+            db.session.flush()
+
+            # Create business registration
+            business_data = session['registration_data']['business']
+            new_business = BusinessRegistration(
+                account_id=new_user.user_id,
+                **business_data
+            )
+            db.session.add(new_business)
+            db.session.flush()
+
+            # Create special services
+            services_data = session['registration_data']['services']
+            new_services = SpecialServices(
+                business_id=new_business.business_id,
+                accreditation_type=services_data['accreditation'],
+                ae_classification=services_data['classification']
+            )
+            db.session.add(new_services)
+
+            # Add rooms
+            for room_data in services_data['rooms']:
+                new_room = Room(
+                    business_id=new_business.business_id,
+                    room_type=room_data['type'],
+                    total_number=room_data['number'],
+                    capacity=room_data['capacity']
+                )
+                db.session.add(new_room)
+
+            # Add event facilities
+            for facility_data in services_data['facilities']:
+                new_facility = EventFacility(
+                    business_id=new_business.business_id,
+                    room_name=facility_data['name'],
+                    capacity=facility_data['capacity'],
+                    facilities=facility_data['amenities']
+                )
+                db.session.add(new_facility)
+
+            # Commit all changes
+            db.session.commit()
+
+            # Clear registration data
+            session.pop('registration_data', None)
+            session.pop('registration_step', None)
+
+            flash('Registration successful! Please login.', 'success')
+            return redirect(url_for('login'))
+
+        except Exception as e:
+            db.session.rollback()
+            flash('Registration failed. Please try again.', 'error')
+            return render_template('LoginCredentials.html')
+
+    return render_template('LoginCredentials.html')
 @app.route('/logout')
 def logout():
     session.pop('user_id', None)
