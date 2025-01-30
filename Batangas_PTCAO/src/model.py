@@ -78,3 +78,5 @@ class EventFacility(db.Model):
     room_name = db.Column(db.String(255), nullable=False)
     capacity = db.Column(db.Integer, nullable=False)
     facilities = db.Column(db.String(255), nullable=False)
+
+
